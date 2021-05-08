@@ -1,9 +1,20 @@
 // Task 3.0     Menu data structure
 var menuLinks = [
   {text: 'about', href: '/about'},
-  {text: 'catalog', href: '/catalog'},
-  {text: 'orders', href: '/orders'},
-  {text: 'account', href: '/account'},
+  {text: 'catalog', href: '#', subLinks: [
+    {text: 'all', href: '/catalog/all'},
+    {text: 'top selling', href: '/catalog/top'},
+    {text: 'search', href: '/catalog/search'},
+  ]},
+  {text: 'orders', href: '#' , subLinks: [
+    {text: 'new', href: '/orders/new'},
+    {text: 'pending', href: '/orders/pending'},
+    {text: 'history', href: '/orders/history'},
+  ]},
+  {text: 'account', href: '#', subLinks: [
+    {text: 'profile', href: '/account/profile'},
+    {text: 'sign out', href: '/account/signout'},
+  ]},
 ];
 
 //Task 1.0
@@ -33,7 +44,44 @@ for(let link of menuLinks) {
   linkTag.setAttribute('href', link.href);
   linkTag.innerHTML = link.text;
   topMenuEl.append(linkTag);
-  console.log(linkTag)
-  // console.log(link)
+}
+//4.0
+const subMenuEl = document.getElementById('sub-menu');
 
-};
+//4.1
+subMenuEl.style.height = '100%';
+
+//4.2
+subMenuEl.style.backgroundColor = 'var(--sub-menu-bg)';
+
+//4.3
+subMenuEl.classList.add('flex-around');
+console.log(subMenuEl)
+//4.4
+subMenuEl.style.position = 'absolute';
+
+//4.5
+subMenuEl.style.top = '0';
+
+//5.1
+const topMenuLinks = document.querySelectorAll('#top-menu a');
+let showingSubMenu = false;
+
+//5.2
+topMenuEl.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  const link = evt.target //target is what fired the event
+  console.log(link);
+  if (link.tagName != 'A'){
+    console.log(link.tagName);
+    return;
+  } else {
+    console.log(link.textContent);
+  }
+  //found tagname of the link is equal to a then return
+});
+
+
+// document.getElementById("myAnchor").addEventListener("click", function(event){
+//   event.preventDefault()
+// });
