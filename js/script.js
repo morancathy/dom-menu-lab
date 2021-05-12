@@ -71,17 +71,25 @@ let showingSubMenu = false;
 topMenuEl.addEventListener('click', (evt) => {
   evt.preventDefault();
   const link = evt.target //target is what fired the event
-  console.log(link);
+  // console.log(link);
   if (link.tagName != 'A'){
     console.log(link.tagName);
     return;
   } else {
     console.log(link.textContent);
   }
-  //found tagname of the link is equal to a then return
+// 5.3
+  const checker = link.classList.contains('active');
+  console.log(checker)
+  if(checker === 'active'){
+      link.classList.remove('active');
+      showingSubMenu = false;
+      subMenuEl.style.top = '0';
+      return;
+  }
+  //5.5
+  if(!checker){
+    link.classList.add('active');
+  }
 });
-
-
-// document.getElementById("myAnchor").addEventListener("click", function(event){
-//   event.preventDefault()
-// });
+// 5.4
