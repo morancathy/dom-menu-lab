@@ -104,7 +104,13 @@ topMenuEl.addEventListener('click', (myFunction) => {  //why arrow function? Can
       subMenuEl.style.top = 0
       return
     }
+    // Task 5.4
+    for (let link of topMenuLinks) {
+      link.classList.remove('active')
+    }
 
+    // Task 5.5
+    clickedItem.classList.add('active')
 
 
 
