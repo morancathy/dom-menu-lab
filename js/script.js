@@ -112,6 +112,18 @@ topMenuEl.addEventListener('click', (myFunction) => {  //why arrow function? Can
     // Task 5.5
     clickedItem.classList.add('active')
 
+    // Task 5.6
+    let findLink = {}
+    for (link of menuLinks) {
+      if (link.text === clickedItem.textContent) {
+        findLink = link
+      }
+    }
 
+    if (findLink.hasOwnProperty('subLinks')) {
+      showingSubMenu = true
+    } else {
+      showingSubMenu = false
+    }
 
 });
