@@ -97,4 +97,15 @@ topMenuEl.addEventListener('click', (myFunction) => {  //why arrow function? Can
 //   } else {
 //     showingSubMenu = false;
 //   }
+// Task 5.3
+    if (clickedItem.classList.contains('active')) {
+      clickedItem.classList.remove('active')
+      showingSubMenu = false
+      subMenuEl.style.top = 0
+      return
+    }
+
+
+
+
 });
