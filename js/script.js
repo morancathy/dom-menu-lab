@@ -127,3 +127,48 @@ topMenuEl.addEventListener('click', (myFunction) => {  //why arrow function? Can
     }
 
 });
+// Task 5.7
+
+if (showingSubMenu === true) {
+   buildSubMenu (sublink);
+   subMenuEl.style.top = "100%";
+}  else {
+   subMenuEl.style.top = 0 ;
+}
+})
+
+
+// Task 6.0  // Task 6.1
+
+subMenuEl.addEventListener ("click" ,(evt) => {
+evt.preventDefault ();
+
+if (evt.target.href) {
+   console.log ("is a link ");
+   console.log ("the element that was clicked is  "+evt.target.textContent);
+   mainEl.innerHTML =  evt.target.textContent ;
+   mainEl.style.fontSize = "35px";
+
+
+
+} else {
+   console.log ("is not a link ");
+
+
+
+}
+
+
+showingSubMenu = false ;
+subMenuEl.style.top =0 ;
+
+topMenuLinks.forEach (link => {
+   link.classList.remove ("active");
+})
+
+
+
+
+
+
+})
