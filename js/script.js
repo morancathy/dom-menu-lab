@@ -74,69 +74,51 @@ const topMenuLinks = document.querySelectorAll('#top-menu a');
 var showingSubMenu = false;
 
 // Task 5.2
-topMenuEl.addEventListener('click', (myFunction) => {  //why arrow function? Can we just use old function syntax?
-  myFunction.preventDefault();
-  const pressed = myFunction.target;
+topMenuEl.addEventListener('click', function(evt) {
+  evt.preventDefault();
+  var link = evt.target;
+  if (link.tagName !== 'A') return;
+  console.log(link.textContent);
 
-  if(pressed.tagName != 'A'){
+  // Task 5.3
+  if (link.classList.contains('active')) {
+    link.classList.remove('active');
+    showingSubMenu = false;
+    subMenuEl.style.top = '0';
     return;
-  }else{
-    pressed.classList.add('active');
-    console.log(pressed.text)  //difference b/w text and textContent?
   }
-
-  //Task 5.3, 5.4, 5.5                   //need to keep working on this
-  // if(pressed.classList.contains('active')){
-  //   showingSubMenu = false;
-  //   subMenuEl.style.top = '0px';
-  //   return;
-  // }
-  //   pressed.classList.remove('active');
-//   if(pressed.classList.contains('subLinks')){
-//     showingSubMenu = true;
-//   } else {
-//     showingSubMenu = false;
-//   }
-// Task 5.3
-    if (clickedItem.classList.contains('active')) {
-      clickedItem.classList.remove('active')
-      showingSubMenu = false
-      subMenuEl.style.top = 0
-      return
-    }
     // Task 5.4
-    for (let link of topMenuLinks) {
-      link.classList.remove('active')
-    }
+    topMenuLinks.forEach(function(link) {
+      link.classList.remove('active');
+    });
 
     // Task 5.5
-    clickedItem.classList.add('active')
+      link.classList.add('active');
 
     // Task 5.6
-    let findLink = {}
-    for (link of menuLinks) {
-      if (link.text === clickedItem.textContent) {
-        findLink = link
-      }
-    }
+    var linkData = menuLinks.find(function(linkObj) {
+      return linkObj.text === link.textContent;
+    });
+    showingSubMenu = 'subLinks' in linkData;
 
-    if (findLink.hasOwnProperty('subLinks')) {
-      showingSubMenu = true
+    // Task 5.7
+    if (showingSubMenu) {
+      buildSubMenu(linkData.subLinks);
+      subMenuEl.style.top = '100%';
     } else {
-      showingSubMenu = false
+      subMenuEl.style.top = '0';
     }
-
 });
-// Task 5.7
-
-if (showingSubMenu === true) {
-   buildSubMenu (sublink);
-   subMenuEl.style.top = "100%";
-}  else {
-   subMenuEl.style.top = 0 ;
+// Task 5.8
+function buildSubMenu(subLinks) {
+  subMenuEl.innerHTML = '';
+  subLinks.forEach(function(link) {
+    var linkEl = document.createElement('a');
+    linkEl.setAttribute('href', link.href);
+    linkEl.textContent = link.text;
+    subMenuEl.appendChild(linkEl);
+  });
 }
-})
-
 
 // Task 6.0  // Task 6.1
 
