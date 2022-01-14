@@ -108,7 +108,13 @@ topMenuEl.addEventListener('click', function(evt) {
     } else {
       subMenuEl.style.top = '0';
     }
+
+    // Task 6.4
+    if (!showingSubMenu) {
+        mainEl.innerHTML = `<h1>${link.textContent}</h1>`;
+    }
 });
+
 // Task 5.8
 function buildSubMenu(subLinks) {
   subMenuEl.innerHTML = '';
@@ -120,37 +126,19 @@ function buildSubMenu(subLinks) {
   });
 }
 
-// Task 6.0  // Task 6.1
-
-subMenuEl.addEventListener ("click" ,(evt) => {
-evt.preventDefault ();
-
-if (evt.target.href) {
-   console.log ("is a link ");
-   console.log ("the element that was clicked is  "+evt.target.textContent);
-   mainEl.innerHTML =  evt.target.textContent ;
-   mainEl.style.fontSize = "35px";
-
-
-
-} else {
-   console.log ("is not a link ");
-
-
-
-}
-
-
-showingSubMenu = false ;
-subMenuEl.style.top =0 ;
-
-topMenuLinks.forEach (link => {
-   link.classList.remove ("active");
-})
-
-
-
-
-
-
-})
+// Task 6.0
+subMenuEl.addEventListener('click', function(evt) {
+  evt.preventDefault();
+  var link = evt.target;
+  if (link.tagName !== 'A') return;
+  console.log(link.textContent);
+  // Task 6.1
+  showingSubMenu = false;
+  subMenuEl.style.top = '0';
+  // Task 6.2
+  topMenuLinks.forEach(function(link) {
+    link.classList.remove('active');
+  });
+  // Task 6.3
+  mainEl.innerHTML = `<h1>${link.textContent}</h1>`;
+});
